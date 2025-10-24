@@ -1,0 +1,1788 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificado de Depósito - Cooperativa Express</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #3d5467 0%, #4a6179 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .header-logo {
+            max-width: 180px;
+            height: auto;
+            margin: 0 auto 20px;
+            display: block;
+            background: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 15px;
+            background: white;
+            border: none;
+            border-radius: 10px 10px 0 0;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #3d5467;
+            transition: all 0.3s;
+        }
+
+        .tab.active {
+            background: #b8d333;
+            color: #3d5467;
+        }
+
+        .tab:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .content {
+            background: white;
+            border-radius: 0 0 15px 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .form-section {
+            border: 2px solid #e5e7eb;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 10px;
+            background: #f9fafb;
+        }
+
+        .form-section h3 {
+            color: #3d5467;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+            border-bottom: 3px solid #b8d333;
+            padding-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #3d5467;
+            font-weight: bold;
+            font-size: 0.95em;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #e5e7eb;
+            border-radius: 6px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #b8d333;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .form-row-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .form-row-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
+        }
+
+        .form-row-4 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 15px;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #b8d333 0%, #a0bb2e 100%);
+            color: #3d5467;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s;
+            margin-top: 20px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            background: linear-gradient(135deg, #a0bb2e 0%, #8aa329 100%);
+        }
+
+        .certificate {
+            border: 3px solid #1e3a8a !important;
+            padding: 40px;
+            background: white;
+            position: relative;
+            box-shadow: 0 0 0 1px #1e3a8a;
+            box-sizing: border-box;
+        }
+
+        .cert-header {
+            text-align: center;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .cert-logo {
+            max-width: 120px;
+            height: auto;
+            margin: 0 auto 15px;
+            display: block;
+        }
+
+        .cert-title {
+            color: #1e3a8a;
+            font-size: 1.8em;
+            font-weight: bold;
+            margin: 15px 0;
+            text-transform: uppercase;
+        }
+
+        .cert-subtitle {
+            color: #666;
+            font-size: 1em;
+            margin-bottom: 15px;
+        }
+
+        .cert-date {
+            text-align: right;
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 0.95em;
+        }
+
+        .cert-body {
+            line-height: 1.6;
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 0.95em;
+        }
+
+        .data-box {
+            border: 2px solid #1e3a8a;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+
+        .data-section-title {
+            background: #1e3a8a;
+            color: white;
+            padding: 8px 12px;
+            margin: -20px -20px 15px -20px;
+            font-weight: bold;
+            border-radius: 6px 6px 0 0;
+            font-size: 0.95em;
+        }
+
+        .data-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .data-field {
+            margin-bottom: 8px;
+        }
+
+        .data-label {
+            font-weight: bold;
+            color: #1e3a8a;
+            font-size: 0.85em;
+            margin-bottom: 2px;
+        }
+
+        .data-value {
+            padding: 6px;
+            background: #f3f4f6;
+            border-bottom: 2px solid #3b82f6;
+            min-height: 28px;
+            font-size: 0.95em;
+        }
+
+        .payment-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+        }
+
+        .payment-table th {
+            background: #1e3a8a;
+            color: white;
+            padding: 8px;
+            text-align: left;
+            font-size: 0.85em;
+        }
+
+        .payment-table td {
+            padding: 6px 8px;
+            border: 1px solid #ddd;
+            background: white;
+            font-size: 0.9em;
+        }
+
+        .payment-table-cert {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0 15px 0;
+        }
+
+        .payment-table-cert th {
+            background: #1e3a8a;
+            color: white;
+            padding: 10px 8px;
+            text-align: center;
+            font-size: 0.85em;
+            border: 1px solid #1e3a8a;
+            font-weight: bold;
+        }
+        
+        .payment-table-cert th:nth-child(1) { width: 200px; } /* Monto */
+        .payment-table-cert th:nth-child(2) { width: 180px; } /* No. Boleta */
+        .payment-table-cert th:nth-child(3) { width: auto; }   /* Banco Emisor */
+        .payment-table-cert th:nth-child(4) { width: 150px; }  /* No. Cuenta */
+        .payment-table-cert th:nth-child(5) { width: 120px; }  /* Tipo */
+
+        .payment-table-cert td {
+            padding: 8px;
+            border: 1px solid #1e3a8a;
+            background: white;
+            font-size: 0.88em;
+            text-align: center;
+        }
+
+        .payment-table-cert tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        .campos-finales-cert {
+            margin-top: 15px;
+            padding-top: 12px;
+            border-top: 2px solid #1e3a8a;
+        }
+
+        .data-row-final {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .data-field-final {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .data-label-final {
+            font-weight: bold;
+            color: #1e3a8a;
+            font-size: 0.85em;
+            white-space: nowrap;
+            min-width: 100px;
+        }
+
+        .data-value-final {
+            flex: 1;
+            padding: 8px 12px;
+            background: #f3f4f6;
+            border-bottom: 2px solid #1e3a8a;
+            font-size: 0.9em;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Estilos para campos finales en 3 filas */
+        .campos-finales-cert {
+            margin-top: 12px;
+        }
+
+        .fila-recibo1,
+        .fila-recibo2 {
+            padding: 10px;
+            background: #e0e7ff;
+            border: 2px solid #1e3a8a;
+            border-radius: 4px;
+            text-align: left;
+            font-size: 0.95em;
+            margin-bottom: 8px;
+        }
+
+        .fila-recibo1 strong,
+        .fila-recibo2 strong {
+            color: #1e3a8a;
+            font-weight: bold;
+        }
+
+        .fila-recibo1 span,
+        .fila-recibo2 span {
+            color: #333;
+            font-weight: bold;
+        }
+
+        .fila-cuota-extras {
+            display: grid;
+            grid-template-columns: 200px 180px auto 150px 120px;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+        
+        .campos-extras-transferencias {
+            display: contents;
+        }
+
+        .campo-cuota-asoc-nuevo {
+            padding: 10px;
+            background: #e0e7ff;
+            border: 2px solid #1e3a8a;
+            border-radius: 4px;
+            text-align: center;
+            font-size: 0.95em;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .campo-cuota-asoc-nuevo strong {
+            color: #1e3a8a;
+            font-weight: bold;
+            display: block;
+        }
+
+        .campo-cuota-asoc-nuevo span {
+            color: #333;
+            font-weight: bold;
+            display: block;
+        }
+
+        .campo-extra-boleta-nuevo {
+            padding: 10px;
+            background: #f3f4f6;
+            border: 2px solid #1e3a8a;
+            border-radius: 4px;
+            text-align: center;
+            font-size: 0.9em;
+        }
+
+        .campo-extra-banco-nuevo {
+            padding: 10px;
+            background: #f3f4f6;
+            border: 2px solid #1e3a8a;
+            border-radius: 4px;
+            text-align: center;
+            font-size: 0.9em;
+        }
+
+        .campo-extra-tipo-nuevo {
+            padding: 10px;
+            background: #f3f4f6;
+            border: 2px solid #1e3a8a;
+            border-radius: 4px;
+            text-align: center;
+            font-size: 0.9em;
+        }
+
+        .campo-extra-cuenta-nuevo {
+            padding: 10px;
+            background: #f3f4f6;
+            border: 2px solid #1e3a8a;
+            border-radius: 4px;
+            text-align: center;
+            font-size: 0.9em;
+        }
+
+        .campo-extra-boleta-nuevo span,
+        .campo-extra-banco-nuevo span,
+        .campo-extra-tipo-nuevo span,
+        .campo-extra-cuenta-nuevo span {
+            color: #333;
+            font-weight: bold;
+        }
+
+        .payment-form-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: white;
+        }
+
+        .payment-form-table th {
+            background: #3d5467;
+            color: white;
+            padding: 12px 8px;
+            text-align: left;
+            font-size: 0.85em;
+            font-weight: bold;
+            border: 1px solid #3d5467;
+        }
+
+        .payment-form-table td {
+            padding: 8px;
+            border: 1px solid #e5e7eb;
+            background: white;
+        }
+
+        .table-input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #e5e7eb;
+            border-radius: 4px;
+            font-size: 0.9em;
+            box-sizing: border-box;
+        }
+
+        .table-input:focus {
+            outline: none;
+            border-color: #b8d333;
+        }
+
+        .btn-add-row {
+            background: #b8d333;
+            color: #3d5467;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: transform 0.2s;
+        }
+
+        .btn-add-row:hover {
+            background: #a0bb2e;
+            transform: scale(1.05);
+        }
+
+        .btn-remove-row {
+            background: #ef4444;
+            color: white;
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background 0.2s;
+        }
+
+        .btn-remove-row:hover {
+            background: #dc2626;
+        }
+
+        .payment-main-wrapper {
+            display: grid;
+            grid-template-columns: 200px 180px 1fr;
+            gap: 15px;
+            align-items: start;
+        }
+
+        .payment-section {
+            border: 2px solid #3d5467;
+            border-radius: 8px;
+            padding: 15px;
+            background: #f9fafb;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .payment-section h4 {
+            margin: 0;
+            padding-bottom: 8px;
+            font-size: 0.95em;
+            color: #3d5467;
+            font-weight: bold;
+            text-align: center;
+            border-bottom: 2px solid #3d5467;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        #inversionesContainer,
+        #boletasContainer,
+        #transferenciasContainer {
+            display: grid;
+            gap: 10px;
+        }
+
+        .inversion-item {
+            padding: 10px;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            position: relative;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+        }
+
+        .boleta-item {
+            padding: 10px;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+        }
+
+        .transferencia-item {
+            padding: 10px;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+        }
+
+        .inversion-item .payment-field,
+        .boleta-item .payment-field {
+            width: 100%;
+        }
+
+        .payment-field {
+            margin-bottom: 8px;
+        }
+
+        .payment-field label {
+            display: block;
+            font-size: 0.75em;
+            margin-bottom: 3px;
+            color: #3d5467;
+            font-weight: bold;
+        }
+
+        .payment-field input,
+        .payment-field select {
+            width: 100%;
+            padding: 6px;
+            border: 1px solid #e5e7eb;
+            border-radius: 4px;
+            font-size: 0.85em;
+        }
+
+        .payment-field input:focus,
+        .payment-field select:focus {
+            outline: none;
+            border-color: #b8d333;
+        }
+
+        .payment-field input[readonly] {
+            background-color: #f3f4f6;
+            color: #666;
+        }
+
+        .campos-fijos {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid #3d5467;
+        }
+
+        .campos-fijos-boleta {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid #3d5467;
+        }
+
+        .campos-fijos-transferencias {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid #3d5467;
+        }
+
+        /* Ajustar altura para alinear con los campos de Cuota Asoc. */
+        .campos-fijos-boleta .payment-field:first-child {
+            margin-top: 185px;
+        }
+
+        .campos-fijos-transferencias .transferencias-grid {
+            margin-top:  185px;
+        }
+
+        .transferencias-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 2fr;
+            gap: 8px;
+            width: 100%;
+        }
+
+        .btn-add-inversion {
+            width: 100%;
+            background: #b8d333;
+            color: #3d5467;
+            padding: 8px;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.85em;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 10px 0;
+        }
+
+        .btn-add-inversion:hover {
+            background: #a0bb2e;
+        }
+
+        .btn-remove-inversion {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: #ef4444;
+            color: white;
+            padding: 3px 8px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.75em;
+        }
+
+        .btn-remove-inversion:hover {
+            background: #dc2626;
+        }
+
+        .conditions {
+            margin-top: 20px;
+        }
+
+        .conditions h3 {
+            color: #1e3a8a;
+            margin-bottom: 12px;
+            font-size: 1.1em;
+        }
+
+        .conditions ol {
+            padding-left: 20px;
+        }
+
+        .conditions li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+            font-size: 0.88em;
+        }
+
+        .signatures {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 50px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+
+        .signature-box {
+            text-align: center;
+        }
+
+        .signature-line {
+            width: 200px;
+            border-top: 2px solid #333;
+            margin: 60px auto 10px;
+        }
+
+        .btn-print {
+            background: #b8d333;
+            color: #3d5467;
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+        }
+
+        .btn-print:hover {
+            background: #a0bb2e;
+        }
+
+        @media print {
+            @page {
+                size: letter;
+                margin: 0.3cm;
+            }
+            * {
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+            }
+            body {
+                background: white;
+                padding: 0;
+                margin: 0;
+            }
+            .header, .tabs, .btn, .btn-print {
+                display: none;
+            }
+            .container {
+                max-width: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            .content {
+                box-shadow: none;
+                padding: 0;
+                border-radius: 0;
+            }
+            .certificate {
+                border: 3px solid #1e3a8a !important;
+                padding: 15px;
+                font-size: 9px;
+                margin: 0;
+                box-shadow: none;
+                page-break-inside: avoid;
+                min-height: auto;
+                height: auto;
+            }
+            
+            .cert-header {
+                margin-bottom: 8px;
+                padding-bottom: 6px;
+                border-bottom: 2px solid #1e3a8a;
+            }
+            .cert-logo {
+                max-width: 90px;
+                height: auto;
+                margin: 0 auto 10px;
+                display: block;
+            }
+            .cert-header > div:first-child {
+                font-size: 11.5px;
+                font-weight: bold;
+                color: #1e3a8a;
+            }
+            .cert-title {
+                font-size: 15px;
+                margin: 6px 0;
+                color: #1e3a8a;
+                font-weight: bold;
+            }
+            .cert-subtitle {
+                font-size: 9.5px;
+                margin-bottom: 6px;
+                color: #333;
+            }
+            .cert-date {
+                margin-bottom: 8px;
+                font-size: 9.5px;
+                font-weight: bold;
+                color: #333;
+            }
+            .cert-body {
+                margin-bottom: 8px;
+                line-height: 1.3;
+                font-size: 9.5px;
+                text-align: justify;
+            }
+            .data-box {
+                border: 2px solid #1e3a8a;
+                padding: 10px;
+                margin: 6px 0;
+                page-break-inside: avoid;
+                border-radius: 4px;
+                background: white;
+            }
+            .data-section-title {
+                background: #1e3a8a !important;
+                color: white !important;
+                padding: 4px 8px;
+                margin: -10px -10px 6px -10px;
+                font-size: 9.5px;
+                border-radius: 3px 3px 0 0;
+                font-weight: bold;
+            }
+            .data-label {
+                font-size: 7.5px;
+                color: #1e3a8a;
+                font-weight: bold;
+                margin-bottom: 2px;
+            }
+            .data-value {
+                padding: 3px 4px;
+                font-size: 8.5px;
+                min-height: 18px;
+                border-bottom: 1px solid #3b82f6;
+                background: #f8f9fa;
+            }
+            .data-row {
+                gap: 6px;
+                margin-bottom: 6px;
+            }
+            .payment-table {
+                font-size: 8px;
+                margin: 4px 0;
+                border-collapse: collapse;
+                width: 100%;
+            }
+            .payment-table th {
+                padding: 4px 6px;
+                font-size: 7.5px;
+                border: 1px solid #1e3a8a;
+                background: #1e3a8a !important;
+                color: white !important;
+                font-weight: bold;
+            }
+            .payment-table td {
+                padding: 3px 6px;
+                font-size: 8px;
+                border: 1px solid #1e3a8a;
+                background: white;
+            }
+            .payment-table tr:nth-child(even) td {
+                background: #f8f9fa;
+            }
+            .payment-table-cert {
+                font-size: 8px;
+                margin: 4px 0 6px 0;
+                border-collapse: collapse;
+                width: 100%;
+            }
+            .payment-table-cert th {
+                padding: 4px 6px;
+                font-size: 7.5px;
+                border: 1px solid #1e3a8a;
+                background: #1e3a8a !important;
+                color: white !important;
+                font-weight: bold;
+                text-align: center;
+            }
+            
+            .payment-table-cert th:nth-child(1) { width: 200px; } /* Monto */
+            .payment-table-cert th:nth-child(2) { width: 180px; } /* No. Boleta */
+            .payment-table-cert th:nth-child(3) { width: auto; }   /* Banco Emisor */
+            .payment-table-cert th:nth-child(4) { width: 150px; }  /* No. Cuenta */
+            .payment-table-cert th:nth-child(5) { width: 120px; }  /* Tipo */
+            .payment-table-cert td {
+                padding: 3px 6px;
+                font-size: 8px;
+                border: 1px solid #1e3a8a;
+                background: white;
+                text-align: center;
+            }
+            .payment-table-cert tbody tr:nth-child(even) td {
+                background: #f8f9fa;
+            }
+            .campos-finales-cert {
+                margin-top: 6px;
+                padding-top: 6px;
+                border-top: 2px solid #1e3a8a;
+            }
+            .data-row-final {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+                gap: 6px;
+                margin-bottom: 4px;
+            }
+            .data-field-final {
+                display: flex;
+                align-items: center;
+                gap: 3px;
+            }
+            .data-label-final {
+                font-weight: bold;
+                color: #1e3a8a;
+                font-size: 7px;
+                white-space: nowrap;
+                min-width: 50px;
+            }
+            .data-value-final {
+                flex: 1;
+                padding: 2px 4px;
+                background: #f3f4f6;
+                border-bottom: 1px solid #1e3a8a;
+                font-size: 7.5px;
+                font-weight: bold;
+            }
+            /* Estilos para campos finales en 3 filas - impresión */
+            .campos-finales-cert {
+                margin-top: 6px;
+            }
+            .fila-recibo1,
+            .fila-recibo2 {
+                padding: 4px 6px;
+                background: #e0e7ff !important;
+                border: 1px solid #1e3a8a;
+                border-radius: 2px;
+                text-align: left;
+                font-size: 7.5px;
+                margin-bottom: 4px;
+            }
+            .fila-recibo1 strong,
+            .fila-recibo2 strong {
+                color: #1e3a8a;
+                font-weight: bold;
+            }
+            .fila-cuota-extras {
+                display: grid;
+                grid-template-columns: 200px 180px auto 150px 120px;
+                gap: 4px;
+                margin-bottom: 4px;
+            }
+            
+            .campos-extras-transferencias {
+                display: contents;
+            }
+            .campo-cuota-asoc-nuevo {
+                padding: 4px 6px;
+                background: #e0e7ff !important;
+                border: 1px solid #1e3a8a;
+                border-radius: 2px;
+                text-align: left;
+                font-size: 7.5px;
+            }
+            .campo-cuota-asoc-nuevo strong {
+                color: #1e3a8a;
+                font-weight: bold;
+            }
+            .campo-extra-boleta-nuevo,
+            .campo-extra-banco-nuevo,
+            .campo-extra-tipo-nuevo,
+            .campo-extra-cuenta-nuevo {
+                padding: 4px 6px;
+                background: #f3f4f6 !important;
+                border: 1px solid #1e3a8a;
+                border-radius: 2px;
+                text-align: center;
+                font-size: 7.5px;
+            }
+            .conditions {
+                margin-top: 10px;
+                page-break-inside: avoid;
+                padding: 8px;
+                background: #f8f9fa;
+                border: 1px solid #e0e0e0;
+                border-radius: 4px;
+            }
+            .conditions h3 {
+                font-size: 10.5px;
+                margin-bottom: 6px;
+                color: #1e3a8a;
+                font-weight: bold;
+            }
+            .conditions ol {
+                padding-left: 18px;
+                margin: 0;
+            }
+            .conditions li {
+                margin-bottom: 3px;
+                line-height: 1.2;
+                font-size: 7.5px;
+                color: #333;
+            }
+            .signatures {
+                margin-top: 30px;
+                padding-top: 15px;
+                padding-bottom: 0;
+                page-break-inside: avoid;
+                border-top: 1px solid #ccc;
+            }
+            .signature-box {
+                padding: 0 10px;
+            }
+            .signature-line {
+                width: 140px;
+                border-top: 2px solid #333;
+                margin-top: 45px;
+                margin-bottom: 6px;
+            }
+            .signature-box strong {
+                font-size: 8.5px;
+                color: #1e3a8a;
+                font-weight: bold;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="https://live.staticflickr.com/65535/54673798887_1808cdecbe_b.jpg" alt="Logo Cooperativa Express" class="header-logo">
+            <h1>Sistema de Certificados Provisionales de Depósito a Plazo Fijo</h1>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" id="tabForm">📝 Formulario</button>
+            <button class="tab" id="tabCert">📄 Certificado</button>
+        </div>  
+
+        <div class="content">
+            <!-- SECCIÓN FORMULARIO -->
+            <div id="form" class="section active">
+                <h2 style="color: #3d5467; margin-bottom: 30px; text-align: center;">Ingrese los Datos del Certificado</h2>
+                
+                <!-- DATOS DE LA AGENCIA -->
+                <div class="form-section">
+                    <h3>📍 Información de Agencia y Fecha</h3>
+                    <div class="form-row-2">
+                        <div class="form-group">
+                            <label>Agencia:</label>
+                            <select id="agencia">
+                                <option value="">Seleccione una agencia</option>
+                                <option value="Escuintla">Escuintla</option>
+                                <option value="Mazatenango">Mazatenango</option>
+                                <option value="San Pedro">San Pedro</option>
+                                <option value="4 Caminos">4 Caminos</option>
+                                <option value="Cobán">Cobán</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Fecha de Emisión:</label>
+                            <input type="date" id="fecha">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DATOS GENERALES -->
+                <div class="form-section">
+                    <h3>👤 Datos Generales</h3>
+                    
+                    <div class="form-row-2">
+                        <div class="form-group">
+                            <label>Nombre:</label>
+                            <input type="text" id="nombre" placeholder="Nombre completo del titular">
+                        </div>
+                        <div class="form-group">
+                            <label>DPI:</label>
+                            <input type="text" id="dpi" placeholder="Número de DPI">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Dirección:</label>
+                        <input type="text" id="direccion" placeholder="Dirección completa">
+                    </div>
+
+                    <div class="form-row-2">
+                        <div class="form-group">
+                            <label>Teléfono:</label>
+                            <input type="tel" id="telefono" placeholder="Número de teléfono">
+                        </div>
+                        <div class="form-group">
+                            <label>Tasa de Interés (%):</label>
+                            <input type="number" id="tasaInteres" placeholder="0.00" step="0.01">
+                        </div>
+                    </div>
+
+                    <div class="form-row-4">
+                        <div class="form-group">
+                            <label>Fecha Inversión:</label>
+                            <input type="date" id="fechaInversion">
+                        </div>
+                        <div class="form-group">
+                            <label>Fecha Vencimiento:</label>
+                            <input type="date" id="fechaVencimiento">
+                        </div>
+                        <div class="form-group">
+                            <label>Plazo (Meses):</label>
+                            <input type="number" id="plazoMeses" placeholder="12">
+                        </div>
+                        <div class="form-group">
+                            <label>Pago de Intereses:</label>
+                            <select id="pagoIntereses">
+                                <option value="">Seleccione</option>
+                                <option value="Mensual">Mensual</option>
+                                <option value="Vencimiento">Vencimiento</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MEDIO DE PAGO -->
+                <div class="form-section">
+                    <h3>💰 Medio de Pago</h3>
+                    
+                    <div class="payment-main-wrapper">
+                        <!-- Sección Monto GTQ -->
+                        <div class="payment-section monto-section">
+                            <h4>Monto GTQ</h4>
+                            <div id="inversionesContainer">
+                                <!-- Las inversiones se agregarán aquí -->
+                            </div>
+                            <button type="button" class="btn-add-inversion" id="btnAddInversion">➕ Agregar Inversión</button>
+                            
+                            <!-- Campos fijos al final -->
+                            <div class="campos-fijos">
+                                <div class="payment-field">
+                                    <label>Total</label>
+                                    <input type="text" id="totalMonto" value="Q 0.00" readonly style="font-weight: bold; background-color: #e0e7ff; color: #1e3a8a;">
+                                </div>
+                                <div class="payment-field">
+                                    <label># Recibo</label>
+                                    <input type="text" id="recibo1" placeholder="# Recibo">
+                                </div>
+                                <div class="payment-field">
+                                    <label>Cuota Asoc.</label>
+                                    <input type="number" id="cuotaAsoc" placeholder="0.00" step="0.01">
+                                </div>
+                                <div class="payment-field">
+                                    <label># Recibo</label>
+                                    <input type="text" id="recibo2" placeholder="# Recibo">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sección No. Boleta/Transacción -->
+                        <div class="payment-section boleta-section">
+                            <h4>No. Boleta/Transacción</h4>
+                            <div id="boletasContainer">
+                                <!-- Las boletas se agregarán aquí -->
+                            </div>
+                            
+                            <!-- Campos adicionales alineados -->
+                            <div class="campos-fijos-boleta">
+                                <div class="payment-field">
+                                    <input type="text" id="campoExtra1Boleta" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sección Transferencias -->
+                        <div class="payment-section transferencias-section">
+                            <h4>Transferencias:</h4>
+                            <div id="transferenciasContainer">
+                                <!-- Las transferencias se agregarán aquí -->
+                            </div>
+                            
+                            <!-- Campos adicionales alineados -->
+                            <div class="campos-fijos-transferencias">
+                                <div class="transferencias-grid">
+                                    <div class="payment-field">
+                                        <input type="text" id="campoExtra1Trans" placeholder="">
+                                    </div>
+                                    <div class="payment-field">
+                                        <input type="text" id="campoExtra2Trans" placeholder="">
+                                    </div>
+                                    <div class="payment-field">
+                                        <input type="text" id="campoExtra3Trans" placeholder="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BENEFICIARIOS -->
+                <div class="form-section">
+                    <h3>👥 Beneficiarios</h3>
+                    
+                    <div class="form-row-2">
+                        <div class="form-group">
+                            <label>Nombre del Beneficiario:</label>
+                            <input type="text" id="beneficiarioNombre" placeholder="Nombre completo del beneficiario">
+                        </div>
+                        <div class="form-group">
+                            <label>DPI del Beneficiario:</label>
+                            <input type="text" id="beneficiarioDpi" placeholder="Número de DPI">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Dirección del Beneficiario:</label>
+                        <input type="text" id="beneficiarioDireccion" placeholder="Dirección completa">
+                    </div>
+
+                    <div class="form-row-2">
+                        <div class="form-group">
+                            <label>Parentesco:</label>
+                            <input type="text" id="parentesco" placeholder="Ej: Hijo/a, Cónyuge, etc.">
+                        </div>
+                        <div class="form-group">
+                            <label>Teléfono del Beneficiario:</label>
+                            <input type="tel" id="beneficiarioTelefono" placeholder="Número de teléfono">
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn" id="btnGenerar">🚀 Generar Certificado</button>
+            </div>
+
+            <!-- SECCIÓN CERTIFICADO -->
+            <div id="certificate" class="section">
+                <div class="certificate" id="certificateContent">
+                    <div class="cert-header">
+                        <img src="https://live.staticflickr.com/65535/54673798887_1808cdecbe_b.jpg" alt="Logo Cooperativa Express" class="cert-logo">
+                        <div style="color: #1e3a8a; font-size: 1.5em; font-weight: bold;">COOPERATIVA INTEGRAL DE AHORRO Y CRÉDITO EXPRESS, R.L.</div>
+                        <div class="cert-title">CERTIFICADO PROVISIONAL</div>
+                        <div class="cert-subtitle">(Depósito a plazo fijo)</div>
+                    </div>
+
+                    <div class="cert-date" id="certDate">Ciudad de Guatemala, --</div>
+
+                    <div class="cert-body">
+                        <p>La Cooperativa Integral de Ahorro y Crédito, Express, Responsabilidad Limitada, <strong>CERTIFICA:</strong> que ha recibido fondos para la constitución de un certificado de depósito a plazo fijo bajo con los siguientes datos y condiciones:</p>
+                    </div>
+
+                    <!-- DATOS GENERALES -->
+                    <div class="data-box">
+                        <div class="data-section-title">DATOS GENERALES</div>
+                        
+                        <div class="data-row">
+                            <div class="data-field">
+                                <div class="data-label">Nombre:</div>
+                                <div class="data-value" id="certNombre">--</div>
+                            </div>
+                            <div class="data-field">
+                                <div class="data-label">DPI:</div>
+                                <div class="data-value" id="certDpi">--</div>
+                            </div>
+                        </div>
+
+                        <div class="data-field">
+                            <div class="data-label">Dirección:</div>
+                            <div class="data-value" id="certDireccion">--</div>
+                        </div>
+
+                        <div class="data-row">
+                            <div class="data-field">
+                                <div class="data-label">Teléfono:</div>
+                                <div class="data-value" id="certTelefono">--</div>
+                            </div>
+                            <div class="data-field">
+                                <div class="data-label">Tasa de Interés:</div>
+                                <div class="data-value" id="certTasaInteres">--</div>
+                            </div>
+                        </div>
+
+                        <div class="data-row">
+                            <div class="data-field">
+                                <div class="data-label">Fecha Inversión:</div>
+                                <div class="data-value" id="certFechaInversion">--</div>
+                            </div>
+                            <div class="data-field">
+                                <div class="data-label">Fecha Vencimiento:</div>
+                                <div class="data-value" id="certFechaVencimiento">--</div>
+                            </div>
+                        </div>
+
+                        <div class="data-row">
+                            <div class="data-field">
+                                <div class="data-label">Plazo:</div>
+                                <div class="data-value" id="certPlazo">-- meses</div>
+                            </div>
+                            <div class="data-field">
+                                <div class="data-label">Pago de Intereses:</div>
+                                <div class="data-value" id="certPagoIntereses">--</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MEDIO DE PAGO -->
+                    <div class="data-box">
+                        <div class="data-section-title">MEDIO DE PAGO</div>
+                        
+                        <table class="payment-table-cert">
+                            <thead>
+                                <tr>
+                                    <th>Monto</th>
+                                    <th>No. Boleta/Transf.</th>
+                                    <th>Banco Emisor</th>
+                                    <th>No. Cuenta</th>
+                                    <th>Tipo</th>
+                                </tr>
+                            </thead>
+                            <tbody id="certPaymentTableBody">
+                                <!-- Se llenará dinámicamente -->
+                            </tbody>
+                        </table>
+
+                        <div class="campos-finales-cert">
+                            <!-- Fila 1: # Recibo -->
+                            <div class="fila-recibo1">
+                                <strong># Recibo:</strong> <span id="certRecibo1">--</span>
+                            </div>
+                            
+                            <!-- Fila 2: Cuota Asoc. y Campos Extras -->
+                            <div class="fila-cuota-extras">
+                                <div class="campo-cuota-asoc-nuevo">
+                                    <strong>Cuota Asociado:</strong>
+                                    <span id="certCuotaAsoc">Q 0.00</span>
+                                </div>
+                                <div class="campo-extra-boleta-nuevo">
+                                    <span id="certCampoExtra1Boleta">--</span>
+                                </div>
+                                <div class="campos-extras-transferencias">
+                                    <div class="campo-extra-banco-nuevo">
+                                        <span id="certCampoExtra1Trans">--</span>
+                                    </div>
+                                    <div class="campo-extra-tipo-nuevo">
+                                        <span id="certCampoExtra2Trans">--</span>
+                                    </div>
+                                    <div class="campo-extra-cuenta-nuevo">
+                                        <span id="certCampoExtra3Trans">--</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Fila 3: # Recibo -->
+                            <div class="fila-recibo2">
+                                <strong># Recibo:</strong> <span id="certNumRecibo">--</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- BENEFICIARIOS -->
+                    <div class="data-box">
+                        <div class="data-section-title">BENEFICIARIOS</div>
+                        
+                        <div class="data-row">
+                            <div class="data-field">
+                                <div class="data-label">Nombre:</div>
+                                <div class="data-value" id="certBeneficiarioNombre">--</div>
+                            </div>
+                            <div class="data-field">
+                                <div class="data-label">DPI:</div>
+                                <div class="data-value" id="certBeneficiarioDpi">--</div>
+                            </div>
+                        </div>
+
+                        <div class="data-field">
+                            <div class="data-label">Dirección:</div>
+                            <div class="data-value" id="certBeneficiarioDireccion">--</div>
+                        </div>
+
+                        <div class="data-row">
+                            <div class="data-field">
+                                <div class="data-label">Parentesco:</div>
+                                <div class="data-value" id="certParentesco">--</div>
+                            </div>
+                            <div class="data-field">
+                                <div class="data-label">Teléfono:</div>
+                                <div class="data-value" id="certBeneficiarioTelefono">--</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="conditions">
+                        <h3>Condiciones especiales:</h3>
+                        <ol>
+                            <li>Los fondos recibidos bajo reserva de cobro, serán validados por el departamento Financiero.</li>
+                            <li>El certificado de depósito original será entregado de 3 a 5 días hábiles después de la presente fecha.</li>
+                            <li>El depósito de inversión deberá retirarse dentro de los 5 días después de la fecha de vencimiento, de lo contrario se renovará automáticamente el Certificado por el mismo período anterior, aplicándose la tasa de interés vigente en la fecha de renovación, capitalizándole los intereses devengados a la fecha de vencimiento (Art. 11 del reglamento).</li>
+                            <li>Los certificados que sean cancelados, deberán ser devueltos al vencimiento del plazo pactado, contra el cual se entregará el saldo de la inversión e intereses correspondientes a que tenga derecho (Art. 12 del reglamento).</li>
+                            <li>Sobre los intereses ganados, la cooperativa descuenta un 10% del impuesto sobre productos financieros, mismo que es reportado ante la Superintendencia de Administración Tributaria.</li>
+                            <li>En caso de extravío del certificado de depósito, el asociado deberá solicitar por escrito su reposición y presentar denuncia de extravío ante el ministerio público y pagando una cuota de Q.100.00 por gastos administrativos.</li>
+                            <li>En caso de renovación de la inversión, para la entrega del nuevo certificado, es necesario entregar el certificado anterior.</li>
+                            <li>No podrá retirarse los fondos antes de la fecha de vencimiento.</li>
+                            <li>En caso que el asociado desee retirar los fondos antes de tiempo, se penalizará un 40% de los intereses devengados; en caso de clientes con pago de interés mensual cuya penalización no pueda ser cubierta con los intereses pendientes de pago, se tomará de la inversión la compensación de la penalización no cubierta.</li>
+                            <li>Los certificados que autorice y entregue la cooperativa para comprobar el saldo de los depósitos a plazo, constituirán títulos ejecutivos para exigir judicialmente el capital y los respectivos intereses que tales documentos expresen, a favor del legítimo titular o beneficiario asignado en caso de muerte previa comprobación.</li>
+                            <li>Solamente el titular de la cuenta podrá efectuar el retiro de los fondos, firmando los comprobantes de liquidación.</li>
+                            <li>Cuando una persona pretenda efectuar retiros de los fondos con un documento del que no sea titular, sin tener la autorización respectiva, para ello, se procederá a decomisar el documento, sin perjuicio de las responsabilidades legales.</li>
+                            <li>La tasa de interés pactada en un certificado de depósito no podrá variar durante el plazo convenido a efecto de garantizar una rentabilidad estable a favor del titular de la cuenta.</li>
+                            <li>Los casos no previstos en las condiciones anteriores, los resolverá el Consejo de Administración de la Cooperativa.</li>
+                        </ol>
+                    </div>
+
+                    <div class="signatures">
+                        <div class="signature-box">
+                            <div class="signature-line"></div>
+                            <strong>Firma Asociado</strong>
+                        </div>
+                        <div class="signature-box">
+                            <div class="signature-line"></div>
+                            <strong>Sello Agencia</strong>
+                        </div>
+                        <div class="signature-box">
+                            <div class="signature-line"></div>
+                            <strong>Firma Jefe de Agencia</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-print" id="btnImprimir">🖨️ Imprimir Certificado</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Establecer fecha actual por defecto
+        const hoy = new Date().toISOString().split('T')[0];
+        document.getElementById('fecha').value = hoy;
+        document.getElementById('fechaInversion').value = hoy;
+
+        // Variable para contar las inversiones
+        let inversionCounter = 0;
+
+        // Función para calcular el total de montos
+        function calcularTotalMontos() {
+            const montos = document.querySelectorAll('.monto-inversion');
+            let total = 0;
+            
+            montos.forEach(input => {
+                const valor = parseFloat(input.value) || 0;
+                total += valor;
+            });
+            
+            document.getElementById('totalMonto').value = 'Q ' + total.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+        }
+
+        // Función para crear una nueva inversión
+        function crearInversion() {
+            inversionCounter++;
+            
+            // Crear inversión
+            const inversionesContainer = document.getElementById('inversionesContainer');
+            const inversionDiv = document.createElement('div');
+            inversionDiv.className = 'inversion-item';
+            inversionDiv.setAttribute('data-inversion', inversionCounter);
+            inversionDiv.innerHTML = `
+                ${inversionCounter > 1 ? '<button type="button" class="btn-remove-inversion" onclick="removeInversion(this)">❌</button>' : ''}
+                <div class="payment-field">
+                    <label>Inversión ${inversionCounter}</label>
+                    <input type="number" class="monto-inversion" placeholder="0.00" step="0.01">
+                </div>
+            `;
+            inversionesContainer.appendChild(inversionDiv);
+            
+            // Crear boleta
+            const boletasContainer = document.getElementById('boletasContainer');
+            const boletaDiv = document.createElement('div');
+            boletaDiv.className = 'boleta-item';
+            boletaDiv.setAttribute('data-inversion', inversionCounter);
+            boletaDiv.innerHTML = `
+                <div class="payment-field">
+                    <input type="text" class="boleta" placeholder="No. boleta">
+                </div>
+            `;
+            boletasContainer.appendChild(boletaDiv);
+            
+            // Crear transferencia
+            const transferenciasContainer = document.getElementById('transferenciasContainer');
+            const transferenciaDiv = document.createElement('div');
+            transferenciaDiv.className = 'transferencia-item';
+            transferenciaDiv.setAttribute('data-inversion', inversionCounter);
+            transferenciaDiv.innerHTML = `
+                <div class="transferencias-grid">
+                    <div class="payment-field">
+                        <input type="text" class="banco" placeholder="Banco">
+                    </div>
+                    <div class="payment-field">
+                        <select class="tipo-cuenta">
+                            <option value="Monetaria">Monetaria</option>
+                            <option value="Ahorro">Ahorro</option>
+                        </select>
+                    </div>
+                    <div class="payment-field">
+                        <input type="text" class="cuenta" placeholder="# cuenta">
+                    </div>
+                </div>
+            `;
+            transferenciasContainer.appendChild(transferenciaDiv);
+            
+            // Agregar event listener al monto
+            const montoInput = inversionDiv.querySelector('.monto-inversion');
+            montoInput.addEventListener('input', calcularTotalMontos);
+            
+            // Sincronizar alturas
+            sincronizarAlturas();
+        }
+
+        // Función para sincronizar alturas de todas las filas
+        function sincronizarAlturas() {
+            const inversionItems = document.querySelectorAll('.inversion-item');
+            const boletaItems = document.querySelectorAll('.boleta-item');
+            const transferenciaItems = document.querySelectorAll('.transferencia-item');
+            
+            // Resetear alturas
+            [...inversionItems, ...boletaItems, ...transferenciaItems].forEach(item => {
+                item.style.height = 'auto';
+            });
+            
+            // También sincronizar las secciones de campos fijos
+            setTimeout(() => {
+                const camposFijos = document.querySelector('.campos-fijos');
+                const camposFijosBoleta = document.querySelector('.campos-fijos-boleta');
+                const camposFijosTransferencias = document.querySelector('.campos-fijos-transferencias');
+                
+                if (camposFijos && camposFijosBoleta && camposFijosTransferencias) {
+                    // Resetear alturas
+                    camposFijos.style.minHeight = 'auto';
+                    camposFijosBoleta.style.minHeight = 'auto';
+                    camposFijosTransferencias.style.minHeight = 'auto';
+                    
+                    // Obtener la altura más alta
+                    const altura1 = camposFijos.offsetHeight;
+                    const altura2 = camposFijosBoleta.offsetHeight;
+                    const altura3 = camposFijosTransferencias.offsetHeight;
+                    const alturaMaxima = Math.max(altura1, altura2, altura3);
+                    
+                    // Aplicar altura máxima
+                    camposFijos.style.minHeight = alturaMaxima + 'px';
+                    camposFijosBoleta.style.minHeight = alturaMaxima + 'px';
+                    camposFijosTransferencias.style.minHeight = alturaMaxima + 'px';
+                }
+            }, 100);
+            
+            // Sincronizar altura de cada fila
+            inversionItems.forEach((inversionItem, index) => {
+                const inversionNum = inversionItem.getAttribute('data-inversion');
+                const boletaItem = document.querySelector(`.boleta-item[data-inversion="${inversionNum}"]`);
+                const transferenciaItem = document.querySelector(`.transferencia-item[data-inversion="${inversionNum}"]`);
+                
+                if (inversionItem && boletaItem && transferenciaItem) {
+                    // Obtener la altura más alta de los tres
+                    const alturaInversion = inversionItem.offsetHeight;
+                    const alturaBoleta = boletaItem.offsetHeight;
+                    const alturaTransferencia = transferenciaItem.offsetHeight;
+                    const alturaMaxima = Math.max(alturaInversion, alturaBoleta, alturaTransferencia);
+                    
+                    // Aplicar la altura máxima a todos
+                    inversionItem.style.height = alturaMaxima + 'px';
+                    boletaItem.style.height = alturaMaxima + 'px';
+                    transferenciaItem.style.height = alturaMaxima + 'px';
+                }
+            });
+        }
+
+        // Función para eliminar inversión
+        function removeInversion(button) {
+            const inversionItem = button.closest('.inversion-item');
+            const inversionNum = inversionItem.getAttribute('data-inversion');
+            
+            // Eliminar inversión, boleta y transferencia correspondiente
+            document.querySelector(`.inversion-item[data-inversion="${inversionNum}"]`).remove();
+            document.querySelector(`.boleta-item[data-inversion="${inversionNum}"]`).remove();
+            document.querySelector(`.transferencia-item[data-inversion="${inversionNum}"]`).remove();
+            
+            calcularTotalMontos();
+            sincronizarAlturas();
+        }
+
+        // Agregar la primera inversión al cargar
+        crearInversion();
+
+        // Botón para agregar inversión
+        document.getElementById('btnAddInversion').addEventListener('click', function() {
+            crearInversion();
+        });
+
+        // Event listeners para las pestañas
+        document.getElementById('tabForm').addEventListener('click', function() {
+            document.getElementById('form').classList.add('active');
+            document.getElementById('certificate').classList.remove('active');
+            this.classList.add('active');
+            document.getElementById('tabCert').classList.remove('active');
+        });
+
+        document.getElementById('tabCert').addEventListener('click', function() {
+            document.getElementById('certificate').classList.add('active');
+            document.getElementById('form').classList.remove('active');
+            this.classList.add('active');
+            document.getElementById('tabForm').classList.remove('active');
+        });
+
+        // Función para formatear fecha
+        function formatearFecha(fecha) {
+            if (!fecha) return '--';
+            const meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 
+                          'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+            const f = new Date(fecha + 'T00:00:00');
+            return f.getDate() + ' de ' + meses[f.getMonth()] + ' de ' + f.getFullYear();
+        }
+
+        // Función para formatear moneda
+        function formatearMoneda(valor) {
+            if (!valor) return 'Q 0.00';
+            return 'Q ' + parseFloat(valor).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+        }
+
+        // Generar certificado
+        document.getElementById('btnGenerar').addEventListener('click', function() {
+            // Obtener todos los valores
+            const agencia = document.getElementById('agencia').value;
+            const fecha = document.getElementById('fecha').value;
+            const nombre = document.getElementById('nombre').value;
+            const dpi = document.getElementById('dpi').value;
+            const direccion = document.getElementById('direccion').value;
+            const telefono = document.getElementById('telefono').value;
+            const tasaInteres = document.getElementById('tasaInteres').value;
+            const fechaInversion = document.getElementById('fechaInversion').value;
+            const fechaVencimiento = document.getElementById('fechaVencimiento').value;
+            const plazoMeses = document.getElementById('plazoMeses').value;
+            const pagoIntereses = document.getElementById('pagoIntereses').value;
+            
+            const cuotaAsoc = document.getElementById('cuotaAsoc').value;
+            const recibo1 = document.getElementById('recibo1').value;
+            const recibo2 = document.getElementById('recibo2').value;
+            const campoExtra1Boleta = document.getElementById('campoExtra1Boleta').value;
+            const campoExtra1Trans = document.getElementById('campoExtra1Trans').value;
+            const campoExtra2Trans = document.getElementById('campoExtra2Trans').value;
+            const campoExtra3Trans = document.getElementById('campoExtra3Trans').value;
+            
+            const beneficiarioNombre = document.getElementById('beneficiarioNombre').value;
+            const beneficiarioDpi = document.getElementById('beneficiarioDpi').value;
+            const beneficiarioDireccion = document.getElementById('beneficiarioDireccion').value;
+            const parentesco = document.getElementById('parentesco').value;
+            const beneficiarioTelefono = document.getElementById('beneficiarioTelefono').value;
+
+            // Obtener datos de las inversiones
+            const inversionItems = document.querySelectorAll('.inversion-item');
+            const paymentData = [];
+            let hasPayment = false;
+            
+            inversionItems.forEach((item, index) => {
+                const inversionNum = item.getAttribute('data-inversion');
+                const monto = item.querySelector('.monto-inversion').value;
+                
+                const boletaItem = document.querySelector(`.boleta-item[data-inversion="${inversionNum}"]`);
+                const boleta = boletaItem ? boletaItem.querySelector('.boleta').value : '';
+                
+                const transferenciaItem = document.querySelector(`.transferencia-item[data-inversion="${inversionNum}"]`);
+                const banco = transferenciaItem ? transferenciaItem.querySelector('.banco').value : '';
+                const cuenta = transferenciaItem ? transferenciaItem.querySelector('.cuenta').value : '';
+                const tipo = transferenciaItem ? transferenciaItem.querySelector('.tipo-cuenta').value : '';
+                
+                if (monto) {
+                    hasPayment = true;
+                    paymentData.push({
+                        monto: monto,
+                        boleta: boleta,
+                        banco: banco,
+                        cuenta: cuenta,
+                        tipo: tipo
+                    });
+                }
+            });
+
+            // Validación básica de campos requeridos
+            if (!agencia || !fecha || !nombre || !hasPayment) {
+                alert('Por favor complete al menos: Agencia, Fecha, Nombre y al menos un Medio de Pago');
+                return;
+            }
+
+            // Llenar la fecha y lugar
+            document.getElementById('certDate').textContent = 'Ciudad de ' + agencia + ', ' + formatearFecha(fecha);
+
+            // Llenar Datos Generales
+            document.getElementById('certNombre').textContent = nombre || '--';
+            document.getElementById('certDpi').textContent = dpi || '--';
+            document.getElementById('certDireccion').textContent = direccion || '--';
+            document.getElementById('certTelefono').textContent = telefono || '--';
+            document.getElementById('certTasaInteres').textContent = tasaInteres ? tasaInteres + '%' : '--';
+            document.getElementById('certFechaInversion').textContent = formatearFecha(fechaInversion);
+            document.getElementById('certFechaVencimiento').textContent = formatearFecha(fechaVencimiento);
+            document.getElementById('certPlazo').textContent = plazoMeses ? plazoMeses + ' meses' : '--';
+            document.getElementById('certPagoIntereses').textContent = pagoIntereses || '--';
+
+            // Llenar Medio de Pago
+            const certPaymentBody = document.getElementById('certPaymentTableBody');
+            certPaymentBody.innerHTML = '';
+            
+            paymentData.forEach((payment, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><strong>Inversión ${index + 1}:</strong> ${formatearMoneda(payment.monto)}</td>
+                    <td>${payment.boleta || '--'}</td>
+                    <td>${payment.banco || '--'}</td>
+                    <td>${payment.cuenta || '--'}</td>
+                    <td>${payment.tipo}</td>
+                `;
+                certPaymentBody.appendChild(row);
+            });
+
+            // Agregar fila de Total
+            const totalRow = document.createElement('tr');
+            totalRow.innerHTML = `
+                <td style="background: #e0e7ff; font-weight: bold; color: #1e3a8a;"><strong>Total:</strong> ${document.getElementById('totalMonto').value}</td>
+                <td colspan="4" style="background: #f3f4f6;"></td>
+            `;
+            certPaymentBody.appendChild(totalRow);
+
+            // Llenar campos finales de Medio de Pago
+            document.getElementById('certRecibo1').textContent = recibo1 || '--';
+            document.getElementById('certCampoExtra1Boleta').textContent = campoExtra1Boleta || '--';
+            document.getElementById('certCampoExtra1Trans').textContent = campoExtra1Trans || '--';
+            document.getElementById('certCampoExtra2Trans').textContent = campoExtra2Trans || '--';
+            document.getElementById('certCampoExtra3Trans').textContent = campoExtra3Trans || '--';
+            document.getElementById('certCuotaAsoc').textContent = formatearMoneda(cuotaAsoc);
+            document.getElementById('certNumRecibo').textContent = recibo2 || '--';
+
+            // Llenar Beneficiarios
+            document.getElementById('certBeneficiarioNombre').textContent = beneficiarioNombre || '--';
+            document.getElementById('certBeneficiarioDpi').textContent = beneficiarioDpi || '--';
+            document.getElementById('certBeneficiarioDireccion').textContent = beneficiarioDireccion || '--';
+            document.getElementById('certParentesco').textContent = parentesco || '--';
+            document.getElementById('certBeneficiarioTelefono').textContent = beneficiarioTelefono || '--';
+
+            // Cambiar a la pestaña del certificado
+            document.getElementById('certificate').classList.add('active');
+            document.getElementById('form').classList.remove('active');
+            document.getElementById('tabCert').classList.add('active');
+            document.getElementById('tabForm').classList.remove('active');
+
+            // Scroll al inicio
+            window.scrollTo(0, 0);
+        });
+
+        // Botón de imprimir
+        document.getElementById('btnImprimir').addEventListener('click', function() {
+            window.print();
+        });
+    </script>
+</body>
+</html>
