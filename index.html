@@ -1085,6 +1085,7 @@
                             <label>Agencia:</label>
                             <select id="agencia">
                                 <option value="">Seleccione una agencia</option>
+                                <option value="Agencia Central">Agencia Central</option>
                                 <option value="Escuintla">Escuintla</option>
                                 <option value="Mazatenango">Mazatenango</option>
                                 <option value="Petén">Petén</option>
@@ -1724,7 +1725,13 @@
             }
 
             // Llenar la fecha y lugar
-            document.getElementById('certDate').textContent = 'Ciudad de ' + agencia + ', ' + formatearFecha(fecha);
+            let lugarFecha = '';
+            if (agencia === 'Agencia Central') {
+                lugarFecha = 'Ciudad de Guatemala (Agencia Central), ' + formatearFecha(fecha);
+            } else {
+                lugarFecha = 'Ciudad de ' + agencia + ', ' + formatearFecha(fecha);
+            }
+            document.getElementById('certDate').textContent = lugarFecha;
 
             // Llenar Datos Generales
             document.getElementById('certNombre').textContent = nombre || '--';
